@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../assets/logo.svg';
 
 const Navbar: React.FC = () => {
   return (
-    <Flex py={2} px={2} position="sticky" top={0} boxShadow="sm">
+    <Flex py={3} px={2} position="sticky" top={0} boxShadow="sm">
       <Container maxW="container.lg">
         <Flex align="center" justify="center">
           <Logo />

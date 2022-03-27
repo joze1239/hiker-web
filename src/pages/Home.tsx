@@ -16,12 +16,19 @@ const Home: React.FC = () => {
     <Container maxW="container.lg" py={4}>
       <Box py={4}>
         <InputGroup>
-          <InputLeftElement children={<SearchIcon color="gray.400" />} />
+          <InputLeftElement children={<SearchIcon color="gray.500" />} />
           <Input
             // value={value}
             //   onChange={handleChange}
             placeholder="Search"
             size="md"
+            backgroundColor="gray.100"
+            border="none"
+            color="gray.800"
+            _placeholder={{ color: 'gray.500' }}
+            _focus={{
+              border: 'none',
+            }}
           />
         </InputGroup>
       </Box>
