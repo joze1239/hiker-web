@@ -6,7 +6,15 @@ import { ROUTE } from 'utils/routes';
 
 const Navbar: React.FC = () => {
   return (
-    <Flex py={3} px={2} position="sticky" top={0} boxShadow="sm">
+    <Flex
+      py={3}
+      px={2}
+      position="sticky"
+      top={0}
+      boxShadow="sm"
+      backgroundColor="white"
+      zIndex={10}
+    >
       <Container maxW="container.lg">
         <Flex align="center" justify="center">
           <Link to={ROUTE.MAP}>
