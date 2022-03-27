@@ -1,15 +1,15 @@
+import { SearchIcon } from '@chakra-ui/icons';
 import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Image,
+  Input,
   InputGroup,
   InputLeftElement,
-  Input,
-  Box,
-  Image,
-  Flex,
-  Container,
-  Button,
-} from "@chakra-ui/react";
-import React from "react";
-import { SearchIcon } from "@chakra-ui/icons";
+} from '@chakra-ui/react';
+import React from 'react';
 
 const Home: React.FC = () => {
   return (

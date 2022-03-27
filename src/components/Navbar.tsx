@@ -1,6 +1,6 @@
-import { Container, Flex } from "@chakra-ui/react";
-import React from "react";
-import { ReactComponent as Logo } from "../assets/logo.svg";
+import { Container, Flex } from '@chakra-ui/react';
+import React from 'react';
+import { ReactComponent as Logo } from '../assets/logo.svg';
 
 const Navbar: React.FC = () => {
   return (
