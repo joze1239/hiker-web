@@ -8,7 +8,9 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  useDisclosure,
 } from '@chakra-ui/react';
+import SidebarFilter from 'components/home/SidebarFilter';
 import React from 'react';
 import { HiOutlineAdjustments, HiSearch } from 'react-icons/hi';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
@@ -17,6 +19,11 @@ import { ROUTE } from 'utils/routes';
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const {
+    isOpen: isSidebarOpen,
+    onOpen: onSidebarOpen,
+    onClose: onSidebarClose,
+  } = useDisclosure();
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -53,6 +60,7 @@ const Home: React.FC = () => {
             colorScheme="primary"
             borderRadius="lg"
             size="lg"
+            onClick={onSidebarOpen}
           />
         </Flex>
 
@@ -75,6 +83,8 @@ const Home: React.FC = () => {
           </Button>
         </Grid>
       </Container>
+
+      <SidebarFilter isOpen={isSidebarOpen} onClose={onSidebarClose} />
 
       <Outlet />
     </>
