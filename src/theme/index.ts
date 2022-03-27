@@ -6,6 +6,7 @@ export const theme: StyleConfig = extendTheme({
   colors,
   components: {
     Button: {
+      baseStyle: { _focus: { boxShadow: 'none' } },
       variants: {
         link: () => ({
           _hover: {
