@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { ROUTE } from '../utils/routes';
-import LocationListPage from './LocationListPage';
-import MapPage from './MapPage';
+import Home from './home/Home';
+import HomeLocationList from './home/HomeLocationList';
+import HomeMap from './home/HomeMap';
 
 const Pages: React.FC = () => {
   return (
@@ -11,8 +12,10 @@ const Pages: React.FC = () => {
       <Navbar />
 
       <Routes>
-        <Route path={ROUTE.MAP} element={<MapPage />} />
-        <Route path={ROUTE.LIST} element={<LocationListPage />} />
+        <Route path="/" element={<Home />}>
+          <Route path={ROUTE.MAP} element={<HomeMap />} />
+          <Route path={ROUTE.LOCATIONS} element={<HomeLocationList />} />
+        </Route>
       </Routes>
     </React.Fragment>
   );

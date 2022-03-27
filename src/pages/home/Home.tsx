@@ -1,26 +1,28 @@
 import {
-  Box,
   Button,
   Container,
   Flex,
   Grid,
   Icon,
   IconButton,
-  Image,
   Input,
   InputGroup,
   InputLeftElement,
 } from '@chakra-ui/react';
 import React from 'react';
 import { HiOutlineAdjustments, HiSearch } from 'react-icons/hi';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ROUTE } from '../utils/routes';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { ROUTE } from '../../utils/routes';
 
-const MapPage: React.FC = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   console.log(location);
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
 
   return (
     <Container maxW="container.lg" py={4}>
@@ -57,26 +59,26 @@ const MapPage: React.FC = () => {
 
       <Grid templateColumns="repeat(2, 1fr)" gap={6} py={4}>
         <Button
-          colorScheme="primary"
+          colorScheme={isActive(ROUTE.MAP) ? 'primary' : 'gray'}
+          variant={isActive(ROUTE.MAP) ? 'solid' : 'link'}
           borderRadius="full"
           onClick={() => navigate(ROUTE.MAP)}
         >
           MAP
         </Button>
-        <Button variant="link" onClick={() => navigate(ROUTE.LIST)}>
+        <Button
+          colorScheme={isActive(ROUTE.LOCATIONS) ? 'primary' : 'gray'}
+          variant={isActive(ROUTE.LOCATIONS) ? 'solid' : 'link'}
+          borderRadius="full"
+          onClick={() => navigate(ROUTE.LOCATIONS)}
+        >
           LIST
         </Button>
       </Grid>
 
-      <Box py={4}>
-        <Image
-          src="https://miro.medium.com/max/800/0*GYbrDqJt23n4ZAFL.png"
-          width="100%"
-          borderRadius="xl"
-        />
-      </Box>
+      <Outlet />
     </Container>
   );
 };
 
-export default MapPage;
+export default Home;
