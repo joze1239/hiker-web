@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   Flex,
+  Grid,
   Icon,
   IconButton,
   Image,
@@ -12,8 +13,15 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { HiOutlineAdjustments, HiSearch } from 'react-icons/hi';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { ROUTE } from '../utils/routes';
 
-const Home: React.FC = () => {
+const MapPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location);
+
   return (
     <Container maxW="container.lg" py={4}>
       <Flex py={4} columnGap={4}>
@@ -47,14 +55,18 @@ const Home: React.FC = () => {
         />
       </Flex>
 
-      <Flex justify="space-around" py={4}>
-        <Button colorScheme="primary" flex={1} borderRadius="full">
+      <Grid templateColumns="repeat(2, 1fr)" gap={6} py={4}>
+        <Button
+          colorScheme="primary"
+          borderRadius="full"
+          onClick={() => navigate(ROUTE.MAP)}
+        >
           MAP
         </Button>
-        <Button variant="link" flex={1}>
+        <Button variant="link" onClick={() => navigate(ROUTE.LIST)}>
           LIST
         </Button>
-      </Flex>
+      </Grid>
 
       <Box py={4}>
         <Image
@@ -67,4 +79,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default MapPage;

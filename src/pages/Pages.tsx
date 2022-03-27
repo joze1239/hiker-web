@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { ROUTE } from '../utils/routes';
-import Home from './Home';
+import LocationListPage from './LocationListPage';
+import MapPage from './MapPage';
 
 const Pages: React.FC = () => {
   return (
@@ -10,7 +11,8 @@ const Pages: React.FC = () => {
       <Navbar />
 
       <Routes>
-        <Route path={ROUTE.HOME} element={<Home />} />
+        <Route path={ROUTE.MAP} element={<MapPage />} />
+        <Route path={ROUTE.LIST} element={<LocationListPage />} />
       </Routes>
     </React.Fragment>
   );
