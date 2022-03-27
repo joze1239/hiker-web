@@ -1,9 +1,9 @@
-import { Box, Image } from '@chakra-ui/react';
+import { Box, Container, Image } from '@chakra-ui/react';
 import React from 'react';
 
 const HomeMap: React.FC = () => {
   return (
-    <div>
+    <Container maxW="container.lg">
       <Box py={4}>
         <Image
           src="https://miro.medium.com/max/800/0*GYbrDqJt23n4ZAFL.png"
@@ -11,7 +11,7 @@ const HomeMap: React.FC = () => {
           borderRadius="xl"
         />
       </Box>
-    </div>
+    </Container>
   );
 };
 
