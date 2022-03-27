@@ -1,8 +1,8 @@
 import { Container, Flex } from '@chakra-ui/react';
+import { ReactComponent as Logo } from 'assets/logo.svg';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Logo } from '../assets/logo.svg';
-import { ROUTE } from '../utils/routes';
+import { ROUTE } from 'utils/routes';
 
 const Navbar: React.FC = () => {
   return (

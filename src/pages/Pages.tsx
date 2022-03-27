@@ -1,10 +1,10 @@
+import Navbar from 'components/Navbar';
+import Home from 'pages//home/Home';
+import HomeLocationList from 'pages/home/HomeLocationList';
+import HomeMap from 'pages/home/HomeMap';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import { ROUTE } from '../utils/routes';
-import Home from './home/Home';
-import HomeLocationList from './home/HomeLocationList';
-import HomeMap from './home/HomeMap';
+import { ROUTE } from 'utils/routes';
 
 const Pages: React.FC = () => {
   return (

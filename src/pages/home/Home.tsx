@@ -12,7 +12,7 @@ import {
 import React from 'react';
 import { HiOutlineAdjustments, HiSearch } from 'react-icons/hi';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { ROUTE } from '../../utils/routes';
+import { ROUTE } from 'utils/routes';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
