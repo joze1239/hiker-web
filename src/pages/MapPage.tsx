@@ -1,8 +1,9 @@
-import { Box, Container, Image } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import LocationSearch from 'components/location/LocationFilter';
 import Navbar from 'components/Navbar';
 import RouteToggle from 'components/RouteToggle';
 import React from 'react';
+import Map, { NavigationControl } from 'react-map-gl';
 import { ROUTE } from 'utils/routes';
 
 const MapPage: React.FC = () => {
@@ -23,13 +24,21 @@ const MapPage: React.FC = () => {
         ]}
       />
 
-      <Container maxW="container.lg">
-        <Box py={4}>
-          <Image
-            src="https://miro.medium.com/max/800/0*GYbrDqJt23n4ZAFL.png"
-            width="100%"
-            borderRadius="xl"
-          />
+      <Container maxW="container.lg" py={4}>
+        <Box borderRadius="xl" overflow="hidden">
+          <Map
+            initialViewState={{
+              longitude: 14.11,
+              latitude: 46.36,
+              zoom: 9,
+            }}
+            style={{
+              height: 400,
+            }}
+            mapStyle="mapbox://styles/mapbox/outdoors-v11"
+          >
+            <NavigationControl position="top-left" />
+          </Map>
         </Box>
       </Container>
     </>

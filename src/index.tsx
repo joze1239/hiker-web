@@ -1,4 +1,5 @@
 import { ColorModeScript } from '@chakra-ui/react';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';

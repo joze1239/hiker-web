@@ -24,6 +24,7 @@ const RouteToggle: React.FC<RouteToggleProps> = ({ routes }) => {
       <Grid templateColumns={`repeat(${routes.length}, 1fr)`} gap={6} py={4}>
         {routes.map((route) => (
           <Button
+            key={route.to}
             colorScheme={isActive(route.to) ? 'primary' : 'gray'}
             variant={isActive(route.to) ? 'solid' : 'link'}
             borderRadius="full"
