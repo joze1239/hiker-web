@@ -1,23 +1,16 @@
-import Navbar from 'components/Navbar';
-import Home from 'pages//home/Home';
-import HomeLocationList from 'pages/home/HomeLocationList';
-import HomeMap from 'pages/home/HomeMap';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ROUTE } from 'utils/routes';
+import LocationListPage from './LocationListPage';
+import MapPage from './MapPage';
 
 const Pages: React.FC = () => {
   return (
-    <React.Fragment>
-      <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path={ROUTE.MAP} element={<HomeMap />} />
-          <Route path={ROUTE.LOCATIONS} element={<HomeLocationList />} />
-        </Route>
-      </Routes>
-    </React.Fragment>
+    <Routes>
+      <Route path="/" element={<Navigate replace to={ROUTE.MAP} />} />
+      <Route path={ROUTE.MAP} element={<MapPage />} />
+      <Route path={ROUTE.LOCATIONS} element={<LocationListPage />} />
+    </Routes>
   );
 };
 
