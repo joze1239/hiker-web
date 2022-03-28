@@ -6,6 +6,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
+/*eslint-disable */
+// @ts-ignore
+mapboxgl.workerClass =
+  require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+/*eslint-enable */
+
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
