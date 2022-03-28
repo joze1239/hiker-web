@@ -34,7 +34,7 @@ const Map: React.FC<MapProps> = ({ longitude, latitude, zoom, height }) => {
 };
 
 Map.defaultProps = {
-  height: 450,
+  height: 430,
 };
 
 export default memo(Map);
