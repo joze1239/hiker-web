@@ -1,4 +1,5 @@
 import { ColorModeScript } from '@chakra-ui/react';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as React from 'react';

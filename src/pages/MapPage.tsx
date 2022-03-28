@@ -1,10 +1,9 @@
 import { Box, Container } from '@chakra-ui/react';
 import LocationSearch from 'components/location/LocationFilter';
-import GeocoderControl from 'components/map/GeocoderControl';
+import Map from 'components/map/Map';
 import Navbar from 'components/Navbar';
 import RouteToggle from 'components/RouteToggle';
 import React from 'react';
-import Map, { GeolocateControl, NavigationControl } from 'react-map-gl';
 import { ROUTE } from 'utils/routes';
 
 const MapPage: React.FC = () => {
@@ -27,21 +26,7 @@ const MapPage: React.FC = () => {
 
       <Container maxW="container.lg" py={4}>
         <Box borderRadius="xl" overflow="hidden">
-          <Map
-            initialViewState={{
-              longitude: 14.11,
-              latitude: 46.36,
-              zoom: 9,
-            }}
-            style={{
-              height: 400,
-            }}
-            mapStyle="mapbox://styles/mapbox/outdoors-v11"
-          >
-            <GeocoderControl position="top-left" />
-            <NavigationControl />
-            <GeolocateControl />
-          </Map>
+          <Map longitude={14.11} latitude={46.36} zoom={9} />
         </Box>
       </Container>
     </>
