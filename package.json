@@ -7,6 +7,7 @@
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@mapbox/mapbox-gl-geocoder": "^5.0.0",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.8.3",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/mapbox__mapbox-gl-geocoder": "^4.7.2",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "eslint": "^8.12.0",
