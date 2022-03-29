@@ -26,8 +26,8 @@ const MapPage: React.FC = () => {
 
       <Container maxW="container.lg">
         <Box py={4}>
-          {Array.from(Array(20)).map((i) => (
-            <Link to="/">
+          {Array.from(Array(20)).map((i, index) => (
+            <Link to="/" key={`${i}_${index}`}>
               <Box p={4} mb={4} borderRadius="lg" backgroundColor="gray.100">
                 <Flex justify="space-between">
                   <Box>
