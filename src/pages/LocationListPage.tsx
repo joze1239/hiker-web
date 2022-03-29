@@ -1,8 +1,9 @@
-import { Box, Container, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Tag, Text } from '@chakra-ui/react';
 import LocationSearch from 'components/location/LocationFilter';
 import Navbar from 'components/Navbar';
 import RouteToggle from 'components/RouteToggle';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ROUTE } from 'utils/routes';
 
 const MapPage: React.FC = () => {
@@ -25,7 +26,23 @@ const MapPage: React.FC = () => {
 
       <Container maxW="container.lg">
         <Box py={4}>
-          <Text>List</Text>
+          {Array.from(Array(20)).map((i) => (
+            <Link to="/">
+              <Box p={4} mb={4} borderRadius="lg" backgroundColor="gray.100">
+                <Flex justify="space-between">
+                  <Box>
+                    <Text fontWeight="semibold">Šmarna gora</Text>
+                    <Text fontSize="sm" color="gray.600">
+                      669m
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Tag backgroundColor="primary.100">Hrib</Tag>
+                  </Box>
+                </Flex>
+              </Box>
+            </Link>
+          ))}
         </Box>
       </Container>
     </>
