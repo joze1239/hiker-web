@@ -19,7 +19,7 @@ const LocationAttribute: React.FC<LocationAttributeProps> = ({
       </Text>
 
       {href && (
-        <Link href={href} isExternal color="gray.600">
+        <Link href={href} isExternal color="gray.600" isTruncated>
           {href}
         </Link>
       )}
