@@ -3,13 +3,13 @@ import LocationSearch from 'components/location/LocationFilter';
 import Navbar from 'components/Navbar';
 import RouteToggle from 'components/RouteToggle';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import { ROUTE } from 'utils/routes';
 
 const MapPage: React.FC = () => {
   return (
     <>
-      <Navbar />
+      <Navbar logo />
       <LocationSearch />
       <RouteToggle
         routes={[
@@ -18,16 +18,19 @@ const MapPage: React.FC = () => {
             name: 'MAP',
           },
           {
-            to: ROUTE.LOCATIONS,
+            to: ROUTE.LOCATION_LIST,
             name: 'LIST',
           },
         ]}
       />
 
-      <Container maxW="container.lg">
+      <Container maxW="container.sm">
         <Box py={4}>
           {Array.from(Array(20)).map((i, index) => (
-            <Link to="/" key={`${i}_${index}`}>
+            <Link
+              to={generatePath(ROUTE.LOCATION, { id: `${index}` })}
+              key={`${i}_${index}`}
+            >
               <Box p={4} mb={4} borderRadius="lg" backgroundColor="gray.100">
                 <Flex justify="space-between">
                   <Box>

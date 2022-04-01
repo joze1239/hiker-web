@@ -9,7 +9,7 @@ import { ROUTE } from 'utils/routes';
 const MapPage: React.FC = () => {
   return (
     <>
-      <Navbar />
+      <Navbar logo />
       <LocationSearch />
       <RouteToggle
         routes={[
@@ -18,7 +18,7 @@ const MapPage: React.FC = () => {
             name: 'MAP',
           },
           {
-            to: ROUTE.LOCATIONS,
+            to: ROUTE.LOCATION_LIST,
             name: 'LIST',
           },
         ]}

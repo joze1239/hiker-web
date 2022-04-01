@@ -1,4 +1,5 @@
 export enum ROUTE {
   MAP = '/map',
-  LOCATIONS = '/locations',
+  LOCATION_LIST = '/locations',
+  LOCATION = '/locations/:id',
 }

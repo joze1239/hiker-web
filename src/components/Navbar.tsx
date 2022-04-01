@@ -4,7 +4,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTE } from 'utils/routes';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  logo?: boolean;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ logo }) => {
   return (
     <Flex
       py={3}
@@ -14,13 +18,16 @@ const Navbar: React.FC = () => {
       boxShadow="sm"
       backgroundColor="white"
       zIndex={10}
+      height="57px"
     >
       <Container maxW="container.lg">
-        <Flex align="center" justify="center">
-          <Link to={ROUTE.MAP}>
-            <Logo />
-          </Link>
-        </Flex>
+        {logo && (
+          <Flex align="center" justify="center">
+            <Link to={ROUTE.MAP}>
+              <Logo />
+            </Link>
+          </Flex>
+        )}
       </Container>
     </Flex>
   );
