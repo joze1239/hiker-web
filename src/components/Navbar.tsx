@@ -22,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ logo, back, title }) => {
       backgroundColor="white"
       zIndex={10}
     >
-      <Container maxW="container.lg" height="60px">
+      <Container maxW="container.sm" height="60px">
         <Flex align="center" justify="center" h="100%" position="relative">
           {back && (
             <Icon
@@ -36,13 +36,13 @@ const Navbar: React.FC<NavbarProps> = ({ logo, back, title }) => {
           )}
 
           {logo && (
-            <Link to={ROUTE.MAP}>
+            <Link to={ROUTE.HOME}>
               <Logo />
             </Link>
           )}
 
           {title && (
-            <Text size="xl" fontWeight="semibold">
+            <Text fontSize="lg" fontWeight="semibold">
               {title}
             </Text>
           )}

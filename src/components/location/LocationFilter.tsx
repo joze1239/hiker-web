@@ -1,5 +1,5 @@
 import {
-  Container,
+  Box,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -22,7 +22,7 @@ const LocationFilter: React.FC = () => {
 
   return (
     <>
-      <Container py={4}>
+      <Box py={4}>
         <Flex py={4} columnGap={4}>
           <InputGroup>
             <InputLeftElement
@@ -54,7 +54,7 @@ const LocationFilter: React.FC = () => {
             onClick={onOpen}
           />
         </Flex>
-      </Container>
+      </Box>
 
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xs">
         <DrawerOverlay />

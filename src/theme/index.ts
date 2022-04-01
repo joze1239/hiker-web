@@ -1,5 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
-import { StyleConfig } from '@chakra-ui/theme-tools';
+import { getColor, StyleConfig } from '@chakra-ui/theme-tools';
 import { colors } from 'theme/colors';
 
 export const theme: StyleConfig = extendTheme({
@@ -13,6 +13,22 @@ export const theme: StyleConfig = extendTheme({
             textDecoration: 'none',
           },
         }),
+      },
+    },
+    Tabs: {
+      variants: {
+        'soft-rounded': (props: any) => {
+          const { colorScheme: c, theme } = props;
+          return {
+            tab: {
+              color: 'gray.500',
+              _selected: {
+                color: 'white',
+                bg: getColor(theme, `${c}.500`),
+              },
+            },
+          };
+        },
       },
     },
   },
