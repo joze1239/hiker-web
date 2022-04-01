@@ -1,33 +1,52 @@
-import { Container, Flex } from '@chakra-ui/react';
+import { Container, Flex, Icon, Text } from '@chakra-ui/react';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { HiArrowLeft } from 'react-icons/hi';
+import { Link, useNavigate } from 'react-router-dom';
 import { ROUTE } from 'utils/routes';
 
 interface NavbarProps {
   logo?: boolean;
+  back?: boolean;
+  title?: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ logo }) => {
+const Navbar: React.FC<NavbarProps> = ({ logo, back, title }) => {
+  const navigate = useNavigate();
+
   return (
     <Flex
-      py={3}
-      px={2}
       position="sticky"
       top={0}
       boxShadow="sm"
       backgroundColor="white"
       zIndex={10}
-      height="57px"
     >
-      <Container maxW="container.lg">
-        {logo && (
-          <Flex align="center" justify="center">
+      <Container maxW="container.lg" height="60px">
+        <Flex align="center" justify="center" h="100%" position="relative">
+          {back && (
+            <Icon
+              onClick={() => navigate(-1)}
+              as={HiArrowLeft}
+              cursor="pointer"
+              boxSize={6}
+              position="absolute"
+              left={0}
+            />
+          )}
+
+          {logo && (
             <Link to={ROUTE.MAP}>
               <Logo />
             </Link>
-          </Flex>
-        )}
+          )}
+
+          {title && (
+            <Text size="xl" fontWeight="semibold">
+              {title}
+            </Text>
+          )}
+        </Flex>
       </Container>
     </Flex>
   );
