@@ -25,6 +25,7 @@ export const theme: StyleConfig = extendTheme({
               _selected: {
                 color: 'white',
                 bg: getColor(theme, `${c}.500`),
+                boxShadow: 'none',
               },
             },
           };
