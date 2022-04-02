@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Container,
   Flex,
   Tab,
@@ -16,10 +15,9 @@ import GeocoderControl from 'components/map/GeocoderControl';
 import Navbar from 'components/Navbar';
 import React, { useState } from 'react';
 import Map, { GeolocateControl, NavigationControl } from 'react-map-gl';
-import { generatePath, Link } from 'react-router-dom';
-import { ROUTE } from 'utils/routes';
 
 const HomePage: React.FC = () => {
+  const [tabIndex, setTabIndex] = React.useState(0);
   const [viewState, setViewState] = useState({
     longitude: 14.11,
     latitude: 46.36,
@@ -29,23 +27,16 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Navbar logo />
-      <Container maxW="container.sm">
+      <Container maxW="container.md">
         <LocationSearch />
 
-        <Button
-          mb={4}
-          onClick={() =>
-            setViewState({
-              longitude: 14.11,
-              latitude: 46.36,
-              zoom: 9,
-            })
-          }
+        <Tabs
+          index={tabIndex}
+          onChange={(index) => setTabIndex(index)}
+          variant="soft-rounded"
+          colorScheme="primary"
+          isFitted
         >
-          Move
-        </Button>
-
-        <Tabs variant="soft-rounded" colorScheme="primary" isFitted>
           <TabList pb={4}>
             <Tab>MAP</Tab>
             <Tab>LIST</Tab>
@@ -71,29 +62,34 @@ const HomePage: React.FC = () => {
             <TabPanel px={0} py={4}>
               <Box>
                 {Array.from(Array(20)).map((i, index) => (
-                  <Link
-                    to={generatePath(ROUTE.LOCATION, { id: `${index}` })}
+                  <Box
                     key={`${i}_${index}`}
+                    onClick={() => {
+                      setTabIndex(0);
+                      setViewState({
+                        latitude: 46.12985,
+                        longitude: 14.46391,
+                        zoom: 12.5,
+                      });
+                    }}
+                    p={4}
+                    mb={4}
+                    borderRadius="lg"
+                    backgroundColor="gray.100"
+                    cursor="pointer"
                   >
-                    <Box
-                      p={4}
-                      mb={4}
-                      borderRadius="lg"
-                      backgroundColor="gray.100"
-                    >
-                      <Flex justify="space-between">
-                        <Box>
-                          <Text fontWeight="semibold">Šmarna gora</Text>
-                          <Text fontSize="sm" color="gray.600">
-                            669m
-                          </Text>
-                        </Box>
-                        <Box>
-                          <Tag backgroundColor="primary.100">Hrib</Tag>
-                        </Box>
-                      </Flex>
-                    </Box>
-                  </Link>
+                    <Flex justify="space-between">
+                      <Box>
+                        <Text fontWeight="semibold">Šmarna gora</Text>
+                        <Text fontSize="sm" color="gray.600">
+                          669m
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Tag backgroundColor="primary.100">Hrib</Tag>
+                      </Box>
+                    </Flex>
+                  </Box>
                 ))}
               </Box>
             </TabPanel>
