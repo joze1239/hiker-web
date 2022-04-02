@@ -1,6 +1,5 @@
 import { Box, Container } from '@chakra-ui/react';
 import LocationAttribute from 'components/location/LocationAttribute';
-import Map from 'components/map/Map';
 import Navbar from 'components/Navbar';
 import React from 'react';
 
@@ -19,12 +18,6 @@ const LocationPage: React.FC = () => {
             name="URL"
             href="https://www.hribi.net/gora/smarna_gora/5/117"
           />
-        </Box>
-
-        <Box py={4}>
-          <Box borderRadius="xl" overflow="hidden">
-            <Map longitude={14.11} latitude={46.36} zoom={9} />
-          </Box>
         </Box>
       </Container>
     </>

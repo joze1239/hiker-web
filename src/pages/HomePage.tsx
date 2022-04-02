@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   Flex,
   Tab,
@@ -11,18 +12,38 @@ import {
   Text,
 } from '@chakra-ui/react';
 import LocationSearch from 'components/location/LocationFilter';
-import Map from 'components/map/Map';
+import GeocoderControl from 'components/map/GeocoderControl';
 import Navbar from 'components/Navbar';
-import React from 'react';
+import React, { useState } from 'react';
+import Map, { GeolocateControl, NavigationControl } from 'react-map-gl';
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE } from 'utils/routes';
 
 const HomePage: React.FC = () => {
+  const [viewState, setViewState] = useState({
+    longitude: 14.11,
+    latitude: 46.36,
+    zoom: 9,
+  });
+
   return (
     <>
       <Navbar logo />
       <Container maxW="container.sm">
         <LocationSearch />
+
+        <Button
+          mb={4}
+          onClick={() =>
+            setViewState({
+              longitude: 14.11,
+              latitude: 46.36,
+              zoom: 9,
+            })
+          }
+        >
+          Move
+        </Button>
 
         <Tabs variant="soft-rounded" colorScheme="primary" isFitted>
           <TabList pb={4}>
@@ -32,7 +53,20 @@ const HomePage: React.FC = () => {
 
           <TabPanels>
             <TabPanel px={0} py={4}>
-              <Map longitude={14.11} latitude={46.36} zoom={9} />
+              <Box borderRadius="xl" overflow="hidden">
+                <Map
+                  {...viewState}
+                  onMove={(evt) => setViewState(evt.viewState)}
+                  style={{
+                    height: 430,
+                  }}
+                  mapStyle="mapbox://styles/mapbox/outdoors-v11"
+                >
+                  <GeocoderControl position="top-left" />
+                  <NavigationControl />
+                  <GeolocateControl />
+                </Map>
+              </Box>
             </TabPanel>
             <TabPanel px={0} py={4}>
               <Box>
