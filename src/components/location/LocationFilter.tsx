@@ -16,9 +16,22 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { HiOutlineAdjustments, HiSearch } from 'react-icons/hi';
+import { useDispatch } from 'react-redux';
+import { useDebounce } from 'react-use';
+import { setSearch } from 'store/slices/locationSlice';
 
 const LocationFilter: React.FC = () => {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [value, setValue] = React.useState('');
+
+  useDebounce(
+    () => {
+      dispatch(setSearch(value));
+    },
+    500,
+    [value]
+  );
 
   return (
     <>
@@ -30,8 +43,10 @@ const LocationFilter: React.FC = () => {
               children={<Icon as={HiSearch} color="gray.400" boxSize={6} />}
             />
             <Input
-              // value={value}
-              // onChange={handleChange}
+              value={value}
+              onChange={({ currentTarget }) => {
+                setValue(currentTarget.value);
+              }}
               placeholder="Search"
               size="lg"
               backgroundColor="gray.100"

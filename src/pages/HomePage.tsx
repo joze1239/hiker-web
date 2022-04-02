@@ -28,6 +28,7 @@ const HomePage: React.FC = () => {
     latitude: 46.36,
     zoom: 9,
   });
+  // const search = useSelector((state: RootState) => state.location.filters.search);
   const { data: locations } = useGetLocationListQuery();
 
   const markers = useMemo(
