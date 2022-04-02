@@ -2,6 +2,7 @@ import {
   Box,
   Container,
   Flex,
+  Icon,
   Tab,
   TabList,
   TabPanel,
@@ -13,8 +14,9 @@ import {
 import LocationSearch from 'components/location/LocationFilter';
 import GeocoderControl from 'components/map/GeocoderControl';
 import Navbar from 'components/Navbar';
-import React, { useState } from 'react';
-import Map, { GeolocateControl, NavigationControl } from 'react-map-gl';
+import React, { useMemo, useState } from 'react';
+import { HiLocationMarker } from 'react-icons/hi';
+import Map, { GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import { useGetLocationListQuery } from 'store/services/location';
 import { scrollToTop } from 'utils/scroll';
 
@@ -26,6 +28,27 @@ const HomePage: React.FC = () => {
     zoom: 9,
   });
   const { data } = useGetLocationListQuery();
+
+  const markers = useMemo(
+    () =>
+      data?.data.map((location) => (
+        <Marker
+          key={location.id}
+          latitude={location.attributes.latitude}
+          longitude={location.attributes.longitude}
+        >
+          <Icon
+            as={HiLocationMarker}
+            color={
+              location.attributes.locationType.data?.attributes?.color ||
+              'gray.700'
+            }
+            boxSize={8}
+          />
+        </Marker>
+      )) ?? [],
+    [data]
+  );
 
   return (
     <>
@@ -59,6 +82,7 @@ const HomePage: React.FC = () => {
                   <GeocoderControl position="top-left" />
                   <NavigationControl />
                   <GeolocateControl />
+                  {markers}
                 </Map>
               </Box>
             </TabPanel>
@@ -89,7 +113,8 @@ const HomePage: React.FC = () => {
                         </Text>
                         {location.attributes.height && (
                           <Text fontSize="sm" color="gray.600">
-                            {location.attributes.height}m
+                            {location.attributes.height}m -{' '}
+                            {location.attributes.mountain}
                           </Text>
                         )}
                       </Box>
@@ -99,6 +124,7 @@ const HomePage: React.FC = () => {
                             location.attributes.locationType.data?.attributes
                               ?.color || 'gray.100'
                           }
+                          color="white"
                         >
                           {
                             location.attributes.locationType.data?.attributes

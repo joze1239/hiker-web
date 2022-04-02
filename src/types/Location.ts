@@ -10,6 +10,7 @@ export interface Location {
       data?: LocationType;
     };
     height?: number;
+    mountain?: string;
     url?: string;
   };
 }
