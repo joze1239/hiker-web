@@ -10,6 +10,6 @@ export const mapLocation = (location: any): Location => {
   return {
     ...attributes,
     id,
-    locationType: locationType ? mapLocationType(locationType.data) : null,
+    locationType: locationType.data ? mapLocationType(locationType.data) : null,
   };
 };
