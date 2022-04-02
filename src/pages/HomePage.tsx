@@ -15,6 +15,8 @@ import GeocoderControl from 'components/map/GeocoderControl';
 import Navbar from 'components/Navbar';
 import React, { useState } from 'react';
 import Map, { GeolocateControl, NavigationControl } from 'react-map-gl';
+import { useGetLocationListQuery } from 'store/services/location';
+import { scrollToTop } from 'utils/scroll';
 
 const HomePage: React.FC = () => {
   const [tabIndex, setTabIndex] = React.useState(0);
@@ -23,6 +25,7 @@ const HomePage: React.FC = () => {
     latitude: 46.36,
     zoom: 9,
   });
+  const { data } = useGetLocationListQuery();
 
   return (
     <>
@@ -61,15 +64,16 @@ const HomePage: React.FC = () => {
             </TabPanel>
             <TabPanel px={0} py={4}>
               <Box>
-                {Array.from(Array(20)).map((i, index) => (
+                {data?.data?.map((location) => (
                   <Box
-                    key={`${i}_${index}`}
+                    key={location.id}
                     onClick={() => {
+                      scrollToTop();
                       setTabIndex(0);
                       setViewState({
-                        latitude: 46.12985,
-                        longitude: 14.46391,
-                        zoom: 12.5,
+                        latitude: location.attributes.latitude,
+                        longitude: location.attributes.longitude,
+                        zoom: 12,
                       });
                     }}
                     p={4}
@@ -80,13 +84,27 @@ const HomePage: React.FC = () => {
                   >
                     <Flex justify="space-between">
                       <Box>
-                        <Text fontWeight="semibold">Šmarna gora</Text>
-                        <Text fontSize="sm" color="gray.600">
-                          669m
+                        <Text fontWeight="semibold">
+                          {location.attributes.name}
                         </Text>
+                        {location.attributes.height && (
+                          <Text fontSize="sm" color="gray.600">
+                            {location.attributes.height}m
+                          </Text>
+                        )}
                       </Box>
                       <Box>
-                        <Tag backgroundColor="primary.100">Hrib</Tag>
+                        <Tag
+                          backgroundColor={
+                            location.attributes.locationType.data?.attributes
+                              ?.color || 'gray.100'
+                          }
+                        >
+                          {
+                            location.attributes.locationType.data?.attributes
+                              ?.name
+                          }
+                        </Tag>
                       </Box>
                     </Flex>
                   </Box>
