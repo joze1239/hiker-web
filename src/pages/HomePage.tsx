@@ -27,27 +27,24 @@ const HomePage: React.FC = () => {
     latitude: 46.36,
     zoom: 9,
   });
-  const { data } = useGetLocationListQuery();
+  const { data: locations } = useGetLocationListQuery();
 
   const markers = useMemo(
     () =>
-      data?.data.map((location) => (
+      locations?.map((location) => (
         <Marker
           key={location.id}
-          latitude={location.attributes.latitude}
-          longitude={location.attributes.longitude}
+          latitude={location.latitude}
+          longitude={location.longitude}
         >
           <Icon
             as={HiLocationMarker}
-            color={
-              location.attributes.locationType.data?.attributes?.color ||
-              'gray.700'
-            }
+            color={location.locationType?.color || 'gray.700'}
             boxSize={8}
           />
         </Marker>
       )) ?? [],
-    [data]
+    [locations]
   );
 
   return (
@@ -88,15 +85,15 @@ const HomePage: React.FC = () => {
             </TabPanel>
             <TabPanel px={0} py={4}>
               <Box>
-                {data?.data?.map((location) => (
+                {locations?.map((location) => (
                   <Box
                     key={location.id}
                     onClick={() => {
                       scrollToTop();
                       setTabIndex(0);
                       setViewState({
-                        latitude: location.attributes.latitude,
-                        longitude: location.attributes.longitude,
+                        latitude: location.latitude,
+                        longitude: location.longitude,
                         zoom: 12,
                       });
                     }}
@@ -108,28 +105,21 @@ const HomePage: React.FC = () => {
                   >
                     <Flex justify="space-between">
                       <Box>
-                        <Text fontWeight="semibold">
-                          {location.attributes.name}
-                        </Text>
-                        {location.attributes.height && (
+                        <Text fontWeight="semibold">{location.name}</Text>
+                        {location.height && (
                           <Text fontSize="sm" color="gray.600">
-                            {location.attributes.height}m -{' '}
-                            {location.attributes.mountain}
+                            {location.height}m - {location.mountain}
                           </Text>
                         )}
                       </Box>
                       <Box>
                         <Tag
                           backgroundColor={
-                            location.attributes.locationType.data?.attributes
-                              ?.color || 'gray.100'
+                            location.locationType?.color || 'gray.100'
                           }
                           color="white"
                         >
-                          {
-                            location.attributes.locationType.data?.attributes
-                              ?.name
-                          }
+                          {location.locationType?.name}
                         </Tag>
                       </Box>
                     </Flex>
