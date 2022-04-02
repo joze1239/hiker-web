@@ -36,7 +36,7 @@ const LocationFilter: React.FC = () => {
               size="lg"
               backgroundColor="gray.100"
               border="none"
-              borderRadius="lg"
+              rounded="lg"
               color="gray.800"
               _placeholder={{ color: 'gray.400' }}
               _focus={{
@@ -49,7 +49,7 @@ const LocationFilter: React.FC = () => {
             aria-label="Filter"
             icon={<HiOutlineAdjustments />}
             colorScheme="primary"
-            borderRadius="lg"
+            rounded="lg"
             size="lg"
             onClick={onOpen}
           />

@@ -11,6 +11,7 @@ import {
   Tag,
   Text,
 } from '@chakra-ui/react';
+import LocationDrawer from 'components/location/LocationDrawer';
 import LocationSearch from 'components/location/LocationFilter';
 import GeocoderControl from 'components/map/GeocoderControl';
 import Navbar from 'components/Navbar';
@@ -53,6 +54,8 @@ const HomePage: React.FC = () => {
       <Container maxW="container.md">
         <LocationSearch />
 
+        <LocationDrawer />
+
         <Tabs
           index={tabIndex}
           onChange={(index) => setTabIndex(index)}
@@ -67,7 +70,7 @@ const HomePage: React.FC = () => {
 
           <TabPanels>
             <TabPanel px={0} py={4}>
-              <Box borderRadius="xl" overflow="hidden">
+              <Box rounded="xl" overflow="hidden">
                 <Map
                   {...viewState}
                   onMove={(evt) => setViewState(evt.viewState)}
@@ -99,7 +102,7 @@ const HomePage: React.FC = () => {
                     }}
                     p={4}
                     mb={4}
-                    borderRadius="lg"
+                    rounded="lg"
                     backgroundColor="gray.100"
                     cursor="pointer"
                   >
