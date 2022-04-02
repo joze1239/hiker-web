@@ -18,6 +18,8 @@ import Navbar from 'components/Navbar';
 import React, { useMemo, useState } from 'react';
 import { HiLocationMarker } from 'react-icons/hi';
 import Map, { GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 import { useGetLocationListQuery } from 'store/services/location';
 import { scrollToTop } from 'utils/scroll';
 
@@ -28,8 +30,8 @@ const HomePage: React.FC = () => {
     latitude: 46.36,
     zoom: 9,
   });
-  // const search = useSelector((state: RootState) => state.location.filters.search);
-  const { data: locations } = useGetLocationListQuery();
+  const filters = useSelector((state: RootState) => state.location.filters);
+  const { data: locations } = useGetLocationListQuery(filters);
 
   const markers = useMemo(
     () =>

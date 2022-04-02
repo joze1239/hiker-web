@@ -9,11 +9,16 @@ export const locationApi = createApi({
   baseQuery,
   reducerPath: LOCATION_API_REDUCER_KEY,
   endpoints: (builder) => ({
-    getLocationList: builder.query<Location[], void>({
-      query: () => ({
+    getLocationList: builder.query<Location[], { search: string }>({
+      query: (filters) => ({
         url: 'locations',
         params: {
           populate: '*',
+          filters: {
+            name: {
+              $containsi: filters.search,
+            },
+          },
         },
       }),
       transformResponse: (response: any) => {
