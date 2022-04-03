@@ -114,7 +114,7 @@ const HomePage: React.FC = () => {
                         <Text fontWeight="semibold">{location.name}</Text>
                         {location.height && (
                           <Text fontSize="sm" color="gray.600">
-                            {location.height}m - {location.mountain}
+                            {location.height}m - {location.mountain?.name}
                           </Text>
                         )}
                       </Box>

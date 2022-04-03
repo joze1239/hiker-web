@@ -1,4 +1,5 @@
 import { LocationType } from 'types/LocationType';
+import { Mountain } from './Mountain';
 
 export interface Location {
   id: number;
@@ -6,7 +7,7 @@ export interface Location {
   latitude: number;
   longitude: number;
   locationType?: LocationType;
+  mountain?: Mountain;
   height?: number;
-  mountain?: string;
   url?: string;
 }
