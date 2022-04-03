@@ -1,51 +1,59 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import { Box, Container, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Box, Container, Slide, Text } from '@chakra-ui/react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectSelectedLocation,
+  setSelectedLocation,
+} from 'store/slices/locationSlice';
 import LocationAttribute from './LocationAttribute';
 
 const LocationDrawer: React.FC = () => {
-  const [open, setOpen] = useState(true);
+  const dispatch = useDispatch();
+  const location = useSelector(selectSelectedLocation);
 
-  if (!open) {
+  const onClose = () => {
+    dispatch(setSelectedLocation(null));
+  };
+
+  if (!location) {
     return null;
   }
 
   return (
-    <Box
-      position="fixed"
-      bottom={0}
-      left={0}
-      width="100%"
-      py={6}
-      zIndex={10}
-      borderTop="1px"
-      borderColor="gray.300"
-      backgroundColor="white"
-    >
-      <Container maxW="container.md">
-        <Box position="relative">
-          <CloseIcon
-            onClick={() => setOpen(false)}
-            boxSize={3}
-            position="absolute"
-            top={0}
-            right={0}
-            cursor="pointer"
-          />
+    <Slide direction="bottom" in={!!location} style={{ zIndex: 10 }}>
+      <Box
+        width="100%"
+        py={6}
+        borderTop="1px"
+        borderColor="gray.300"
+        backgroundColor="white"
+      >
+        <Container maxW="container.md">
+          <Box position="relative">
+            <CloseIcon
+              onClick={() => onClose()}
+              boxSize={3}
+              position="absolute"
+              top={0}
+              right={0}
+              cursor="pointer"
+            />
 
-          <Text mb={4} fontSize="xl" fontWeight="bold">
-            Triglav
-          </Text>
+            <Text mb={4} fontSize="xl" fontWeight="bold">
+              {location.name}
+            </Text>
 
-          <LocationAttribute name="Height" value="2864m" />
-          <LocationAttribute name="Mountain" value="Julijske Alpe" />
-          <LocationAttribute
-            name="URL"
-            href="https://www.hribi.net/gora/triglav/1/1"
-          />
-        </Box>
-      </Container>
-    </Box>
+            <LocationAttribute name="Height" value={`${location.height}m`} />
+            <LocationAttribute
+              name="Mountain"
+              value={location.mountain?.name}
+            />
+            <LocationAttribute name="URL" href={location.url} />
+          </Box>
+        </Container>
+      </Box>
+    </Slide>
   );
 };
 
