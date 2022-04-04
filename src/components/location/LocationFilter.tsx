@@ -12,10 +12,11 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
-import { HiOutlineAdjustments, HiSearch } from 'react-icons/hi';
+import { HiOutlineAdjustments, HiSearch, HiX } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 import { useDebounce } from 'react-use';
 import { setSearch } from 'store/slices/locationSlice';
@@ -33,11 +34,16 @@ const LocationFilter: React.FC = () => {
     [value]
   );
 
+  const clearSearch = () => {
+    setValue('');
+    dispatch(setSearch(''));
+  };
+
   return (
     <>
       <Box py={4}>
         <Flex py={4} columnGap={4}>
-          <InputGroup>
+          <InputGroup size="lg">
             <InputLeftElement
               height="100%"
               children={<Icon as={HiSearch} color="gray.400" boxSize={6} />}
@@ -48,7 +54,6 @@ const LocationFilter: React.FC = () => {
                 setValue(currentTarget.value);
               }}
               placeholder="Search"
-              size="lg"
               backgroundColor="gray.100"
               border="none"
               rounded="lg"
@@ -58,6 +63,13 @@ const LocationFilter: React.FC = () => {
                 border: 'none',
               }}
             />
+            {!!value && (
+              <InputRightElement
+                height="100%"
+                onClick={clearSearch}
+                children={<Icon as={HiX} color="gray.400" boxSize={6} />}
+              />
+            )}
           </InputGroup>
 
           <IconButton
