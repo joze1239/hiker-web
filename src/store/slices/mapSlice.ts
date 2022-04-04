@@ -10,9 +10,9 @@ const mapSlice = createSlice({
   name: 'location',
   initialState: {
     position: {
-      longitude: 14.11,
-      latitude: 46.36,
-      zoom: 9,
+      latitude: 46.1203,
+      longitude: 14.8156,
+      zoom: 6,
     },
   } as MapState,
   reducers: {
