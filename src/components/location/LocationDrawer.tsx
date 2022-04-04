@@ -27,7 +27,7 @@ const LocationDrawer: React.FC = () => {
         py={6}
         borderTop="1px"
         borderColor="gray.300"
-        backgroundColor="white"
+        bg="white"
       >
         <Container maxW="container.md">
           <Box position="relative">

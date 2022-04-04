@@ -1,4 +1,4 @@
-import { Box, Icon } from '@chakra-ui/react';
+import { Box, Flex, Icon, Spinner } from '@chakra-ui/react';
 import GeocoderControl from 'components/map/GeocoderControl';
 import React, { useMemo } from 'react';
 import { HiLocationMarker, HiOutlineLocationMarker } from 'react-icons/hi';
@@ -14,9 +14,10 @@ import { MapPosition } from 'types/MapPosition';
 
 interface LocationMapProps {
   locations: Location[];
+  isLoading: boolean;
 }
 
-const LocationMap: React.FC<LocationMapProps> = ({ locations }) => {
+const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
   const dispatch = useDispatch();
   const position = useSelector(selectMapPosition);
   const selectedLocation = useSelector(selectSelectedLocation);
@@ -57,7 +58,31 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations }) => {
   );
 
   return (
-    <Box rounded="xl" overflow="hidden">
+    <Box position="relative" rounded="xl" overflow="hidden">
+      {isLoading && (
+        <Flex
+          position="absolute"
+          top={0}
+          left={0}
+          zIndex={3}
+          width="100%"
+          height="100%"
+          align="center"
+          justify="center"
+        >
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            width="100%"
+            height="100%"
+            bg="gray"
+            opacity={0.15}
+          ></Box>
+          <Spinner size="xl" />
+        </Flex>
+      )}
+
       <Map
         {...position}
         onMove={(evt) => onMove(evt.viewState)}

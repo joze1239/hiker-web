@@ -15,13 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ logo, back, title }) => {
   const navigate = useNavigate();
 
   return (
-    <Flex
-      position="sticky"
-      top={0}
-      boxShadow="sm"
-      backgroundColor="white"
-      zIndex={10}
-    >
+    <Flex position="sticky" top={0} boxShadow="sm" bg="white" zIndex={10}>
       <Container maxW="container.sm" height="60px">
         <Flex align="center" justify="center" h="100%" position="relative">
           {back && (

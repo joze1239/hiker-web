@@ -27,7 +27,11 @@ const HomePage: React.FC = () => {
   const filters = useSelector((state: RootState) => state.location.filters);
   const [tabIndex, setTabIndex] = React.useState(0);
 
-  const { data: locations } = useGetLocationListQuery(filters);
+  const {
+    data: locations,
+    isFetching,
+    isLoading,
+  } = useGetLocationListQuery(filters);
 
   useEffect(() => {
     if (selectedLocation && tabIndex !== 0) {
@@ -61,11 +65,18 @@ const HomePage: React.FC = () => {
 
           <TabPanels>
             <TabPanel px={0} py={4}>
-              <LocationMap locations={locations || []} />
+              <LocationMap
+                locations={locations || []}
+                isLoading={isLoading || isFetching}
+              />
             </TabPanel>
             <TabPanel px={0} py={4}>
-              <LocationList locations={locations || []} />
+              <LocationList
+                locations={locations || []}
+                isLoading={isLoading || isFetching}
+              />
             </TabPanel>
+            loading
           </TabPanels>
         </Tabs>
       </Container>

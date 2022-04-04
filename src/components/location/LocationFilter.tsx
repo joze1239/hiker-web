@@ -54,7 +54,7 @@ const LocationFilter: React.FC = () => {
                 setValue(currentTarget.value);
               }}
               placeholder="Search"
-              backgroundColor="gray.100"
+              bg="gray.100"
               border="none"
               rounded="lg"
               color="gray.800"

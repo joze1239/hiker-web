@@ -1,4 +1,4 @@
-import { Box, Flex, Tag, Text } from '@chakra-ui/react';
+import { Box, Flex, Spinner, Tag, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setSelectedLocation } from 'store/slices/locationSlice';
@@ -7,13 +7,31 @@ import { Location } from 'types/Location';
 
 interface LocationListProps {
   locations: Location[];
+  isLoading: boolean;
 }
 
-const LocationList: React.FC<LocationListProps> = ({ locations }) => {
+const LocationList: React.FC<LocationListProps> = ({
+  locations,
+  isLoading,
+}) => {
   const dispatch = useDispatch();
+
+  if (isLoading) {
+    return (
+      <Flex justify="center" mt={4}>
+        <Spinner size="lg" />
+      </Flex>
+    );
+  }
 
   return (
     <Box>
+      {locations.length === 0 && (
+        <Text fontSize="lg" align="center" mt={4}>
+          No results found.
+        </Text>
+      )}
+
       {locations.map((location) => (
         <Box
           key={location.id}
@@ -30,7 +48,7 @@ const LocationList: React.FC<LocationListProps> = ({ locations }) => {
           p={4}
           mb={4}
           rounded="lg"
-          backgroundColor="gray.100"
+          bg="gray.100"
           cursor="pointer"
         >
           <Flex justify="space-between">
@@ -44,7 +62,7 @@ const LocationList: React.FC<LocationListProps> = ({ locations }) => {
             </Box>
             <Box>
               <Tag
-                backgroundColor={location.locationType?.color || 'gray.100'}
+                bg={location.locationType?.color || 'gray.100'}
                 color="white"
               >
                 {location.locationType?.name}
