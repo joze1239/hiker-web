@@ -1,9 +1,15 @@
 import { Box, Flex, Spinner, Tag, Text } from '@chakra-ui/react';
 import React from 'react';
+import {
+  HiOutlineClock,
+  HiOutlineFlag,
+  HiOutlineLocationMarker,
+} from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 import { setSelectedLocation } from 'store/slices/locationSlice';
 import { setPosition } from 'store/slices/mapSlice';
 import { Location } from 'types/Location';
+import LocationAttribute from './LocationAttribute';
 
 interface LocationListProps {
   locations: Location[];
@@ -53,11 +59,31 @@ const LocationList: React.FC<LocationListProps> = ({
         >
           <Flex justify="space-between">
             <Box>
-              <Text fontWeight="semibold">{location.name}</Text>
+              <Text fontWeight="semibold" mb={2}>
+                {location.name}
+              </Text>
+
+              {location.address && (
+                <LocationAttribute
+                  icon={HiOutlineLocationMarker}
+                  value={location.address}
+                />
+              )}
+
               {location.height && (
-                <Text fontSize="sm" color="gray.600">
-                  {location.height}m - {location.mountain?.name}
-                </Text>
+                <LocationAttribute
+                  icon={HiOutlineFlag}
+                  value={`${location.height}m - ${location.mountain?.name}`}
+                  size="sm"
+                />
+              )}
+
+              {location.walkTime && (
+                <LocationAttribute
+                  icon={HiOutlineClock}
+                  value={location.walkTime}
+                  size="sm"
+                />
               )}
             </Box>
             <Box>

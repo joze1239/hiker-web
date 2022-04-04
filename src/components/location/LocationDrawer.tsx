@@ -1,6 +1,14 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import { Box, Container, Slide, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Slide, Text } from '@chakra-ui/react';
 import React from 'react';
+import { FaParking } from 'react-icons/fa';
+import {
+  HiOutlineCalendar,
+  HiOutlineClock,
+  HiOutlineFlag,
+  HiOutlineLightBulb,
+  HiOutlineLocationMarker,
+} from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectSelectedLocation,
@@ -44,12 +52,56 @@ const LocationDrawer: React.FC = () => {
               {location.name}
             </Text>
 
-            <LocationAttribute name="Height" value={`${location.height}m`} />
-            <LocationAttribute
-              name="Mountain"
-              value={location.mountain?.name}
-            />
-            <LocationAttribute name="URL" href={location.url} />
+            {location.address && (
+              <LocationAttribute
+                icon={HiOutlineLocationMarker}
+                value={location.address}
+              />
+            )}
+
+            {location.parking && (
+              <LocationAttribute icon={FaParking} value={location.parking} />
+            )}
+
+            {location.height && (
+              <LocationAttribute
+                icon={HiOutlineFlag}
+                value={`${location.height}m - ${location.mountain?.name}`}
+              />
+            )}
+
+            {location.walkTime && (
+              <LocationAttribute
+                icon={HiOutlineClock}
+                value={location.walkTime}
+              />
+            )}
+
+            {location.visitedAt && (
+              <LocationAttribute
+                icon={HiOutlineCalendar}
+                value={location.visitedAt}
+                align="flex-start"
+              />
+            )}
+
+            {location.note && (
+              <LocationAttribute
+                icon={HiOutlineLightBulb}
+                value={location.note}
+              />
+            )}
+
+            {location.url && (
+              <Button
+                onClick={() => window.open(location.url, '_blank')}
+                w="100%"
+                mt={4}
+                colorScheme="primary"
+              >
+                VIEW DETAILS
+              </Button>
+            )}
           </Box>
         </Container>
       </Box>

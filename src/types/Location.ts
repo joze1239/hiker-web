@@ -9,5 +9,10 @@ export interface Location {
   locationType?: LocationType;
   mountain?: Mountain;
   height?: number;
+  walkTime?: string;
+  address?: string;
+  note?: string;
   url?: string;
+  visitedAt: string;
+  parking: string;
 }

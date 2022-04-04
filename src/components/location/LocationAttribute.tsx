@@ -1,32 +1,35 @@
-import { Flex, Link, Text } from '@chakra-ui/react';
+import { Flex, Icon, Text } from '@chakra-ui/react';
 import React from 'react';
+import { IconType } from 'react-icons';
 
 interface LocationAttributeProps {
-  name: string;
-  value?: string;
-  href?: string;
+  value: string;
+  icon: IconType;
+  size?: 'sm' | 'md';
+  align?: 'center' | 'flex-start' | 'flex-end';
 }
 
 const LocationAttribute: React.FC<LocationAttributeProps> = ({
-  name,
   value,
-  href,
+  icon,
+  size,
+  align,
 }) => {
   return (
-    <Flex mb={1}>
-      <Text mr={1} fontWeight="semibold">
-        {name}:
-      </Text>
-
-      {href && (
-        <Link href={href} isExternal color="gray.600" isTruncated>
-          {href}
-        </Link>
+    <Flex mb={size == 'md' ? 2 : 1} align={align}>
+      <Icon as={icon} mr={2} color="gray.600" boxSize={size == 'md' ? 5 : 4} />
+      {value && (
+        <Text fontSize={size} color="gray.600" whiteSpace="pre-line">
+          {value}
+        </Text>
       )}
-
-      {value && <Text color="gray.600">{value}</Text>}
     </Flex>
   );
+};
+
+LocationAttribute.defaultProps = {
+  size: 'md',
+  align: 'center',
 };
 
 export default LocationAttribute;

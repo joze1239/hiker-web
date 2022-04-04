@@ -1,7 +1,12 @@
 import { Box, Flex, Icon, Spinner } from '@chakra-ui/react';
 import GeocoderControl from 'components/map/GeocoderControl';
 import React, { useMemo } from 'react';
-import { HiLocationMarker, HiOutlineLocationMarker } from 'react-icons/hi';
+import {
+  HiCheckCircle,
+  HiLocationMarker,
+  HiOutlineCheckCircle,
+  HiOutlineLocationMarker,
+} from 'react-icons/hi';
 import Map, { GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -32,6 +37,16 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
     );
   };
 
+  const getMapIcon = (location: Location) => {
+    const isSelected = selectedLocation?.id === location.id;
+
+    if (location.visitedAt) {
+      return isSelected ? HiOutlineCheckCircle : HiCheckCircle;
+    }
+
+    return isSelected ? HiOutlineLocationMarker : HiLocationMarker;
+  };
+
   const markers = useMemo(
     () =>
       locations.map((location) => (
@@ -44,13 +59,9 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
           }}
         >
           <Icon
-            as={
-              selectedLocation?.id === location.id
-                ? HiOutlineLocationMarker
-                : HiLocationMarker
-            }
+            as={getMapIcon(location)}
             color={location.locationType?.color || 'gray.700'}
-            boxSize={8}
+            boxSize={location.visitedAt ? 7 : 8}
           />
         </Marker>
       )) ?? [],

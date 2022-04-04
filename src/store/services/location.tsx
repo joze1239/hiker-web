@@ -14,6 +14,7 @@ export const locationApi = createApi({
         url: 'locations',
         params: {
           populate: '*',
+          sort: ['height', 'name'],
           filters: {
             name: {
               $containsi: filters.search,
