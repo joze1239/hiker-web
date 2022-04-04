@@ -12,13 +12,17 @@ import LocationList from 'components/location/LocationList';
 import LocationMap from 'components/location/LocationMap';
 import Navbar from 'components/Navbar';
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { useGetLocationListQuery } from 'store/services/location';
-import { selectSelectedLocation } from 'store/slices/locationSlice';
+import {
+  selectSelectedLocation,
+  setSelectedLocation,
+} from 'store/slices/locationSlice';
 import { scrollToTop } from 'utils/scroll';
 
 const HomePage: React.FC = () => {
+  const dispatch = useDispatch();
   const selectedLocation = useSelector(selectSelectedLocation);
   const filters = useSelector((state: RootState) => state.location.filters);
   const [tabIndex, setTabIndex] = React.useState(0);
@@ -42,7 +46,10 @@ const HomePage: React.FC = () => {
 
         <Tabs
           index={tabIndex}
-          onChange={(index) => setTabIndex(index)}
+          onChange={(index) => {
+            setTabIndex(index);
+            dispatch(setSelectedLocation(null));
+          }}
           variant="soft-rounded"
           colorScheme="primary"
           isFitted

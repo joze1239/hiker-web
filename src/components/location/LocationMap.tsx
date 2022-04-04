@@ -1,10 +1,13 @@
 import { Box, Icon } from '@chakra-ui/react';
 import GeocoderControl from 'components/map/GeocoderControl';
 import React, { useMemo } from 'react';
-import { HiLocationMarker } from 'react-icons/hi';
+import { HiLocationMarker, HiOutlineLocationMarker } from 'react-icons/hi';
 import Map, { GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedLocation } from 'store/slices/locationSlice';
+import {
+  selectSelectedLocation,
+  setSelectedLocation,
+} from 'store/slices/locationSlice';
 import { selectMapPosition, setPosition } from 'store/slices/mapSlice';
 import { Location } from 'types/Location';
 import { MapPosition } from 'types/MapPosition';
@@ -16,6 +19,7 @@ interface LocationMapProps {
 const LocationMap: React.FC<LocationMapProps> = ({ locations }) => {
   const dispatch = useDispatch();
   const position = useSelector(selectMapPosition);
+  const selectedLocation = useSelector(selectSelectedLocation);
 
   const onMove = (position: MapPosition) => {
     dispatch(
@@ -39,13 +43,17 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations }) => {
           }}
         >
           <Icon
-            as={HiLocationMarker}
+            as={
+              selectedLocation?.id === location.id
+                ? HiOutlineLocationMarker
+                : HiLocationMarker
+            }
             color={location.locationType?.color || 'gray.700'}
             boxSize={8}
           />
         </Marker>
       )) ?? [],
-    [locations, position.zoom]
+    [locations, selectedLocation]
   );
 
   return (
