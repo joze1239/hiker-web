@@ -15,6 +15,12 @@ export const theme: StyleConfig = extendTheme({
         }),
       },
     },
+    // Checkbox: {
+    //   baseStyle: {
+    //     _focusVisible: { boxShadow: 'none' },
+    //     _focus: { boxShadow: 'none' },
+    //   },
+    // },
     Tabs: {
       variants: {
         'soft-rounded': (props: any) => {

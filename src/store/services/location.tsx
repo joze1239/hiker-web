@@ -15,6 +15,9 @@ export const locationApi = createApi({
         params: {
           populate: '*',
           sort: ['height', 'name'],
+          pagination: {
+            limit: -1,
+          },
           filters: {
             name: {
               $containsi: filters.search,
@@ -31,7 +34,7 @@ export const locationApi = createApi({
         url: `locations/${id}`,
       }),
       transformResponse: (response: any) => {
-        return response.data?.mapLocation(location);
+        return mapLocation(response.data);
       },
     }),
   }),
