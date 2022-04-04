@@ -19,7 +19,7 @@ import {
   Stack,
   useDisclosure,
 } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { HiOutlineAdjustments, HiSearch, HiX } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
@@ -50,10 +50,6 @@ const LocationFilter: React.FC = () => {
     setValue('');
     dispatch(setSearch(''));
   };
-
-  useEffect(() => {
-    onOpen();
-  }, []);
 
   return (
     <>
