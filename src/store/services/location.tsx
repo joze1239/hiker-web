@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from 'store/baseQuery';
 import { mapLocation } from 'store/mappers/mapLocation';
 import { Location } from 'types/Location';
+import { LocationFilters } from 'types/LocationFilters';
 
 export const LOCATION_API_REDUCER_KEY = 'locationApi';
 
@@ -9,7 +10,7 @@ export const locationApi = createApi({
   baseQuery,
   reducerPath: LOCATION_API_REDUCER_KEY,
   endpoints: (builder) => ({
-    getLocationList: builder.query<Location[], { search: string }>({
+    getLocationList: builder.query<Location[], LocationFilters>({
       query: (filters) => ({
         url: 'locations',
         params: {
@@ -21,6 +22,11 @@ export const locationApi = createApi({
           filters: {
             name: {
               $containsi: filters.search,
+            },
+            locationType: {
+              id: {
+                $in: filters.locationTypes,
+              },
             },
           },
         },

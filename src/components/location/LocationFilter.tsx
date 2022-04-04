@@ -21,15 +21,21 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { HiOutlineAdjustments, HiSearch, HiX } from 'react-icons/hi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
+import { RootState } from 'store';
 import { useGetLocationTypeListQuery } from 'store/services/locationType';
-import { setSearch } from 'store/slices/locationSlice';
+import {
+  clearLocationTypes,
+  setSearch,
+  toggleLocationType,
+} from 'store/slices/locationSlice';
 
 const LocationFilter: React.FC = () => {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = React.useState('');
+  const filters = useSelector((state: RootState) => state.location.filters);
   const { data: locationTypes } = useGetLocationTypeListQuery();
 
   useDebounce(
@@ -101,17 +107,24 @@ const LocationFilter: React.FC = () => {
           <DrawerBody>
             <Stack>
               {locationTypes?.map((locationType) => (
-                <Checkbox colorScheme="primary">{locationType.name}</Checkbox>
-              ))}
-              {locationTypes?.map((locationType) => (
-                <Checkbox colorScheme="primary" size="lg">
+                <Checkbox
+                  key={locationType.id}
+                  isChecked={filters.locationTypes.includes(locationType.id)}
+                  onChange={() => dispatch(toggleLocationType(locationType.id))}
+                  colorScheme="primary"
+                  size="lg"
+                >
                   {locationType.name}
                 </Checkbox>
               ))}
             </Stack>
           </DrawerBody>
           <DrawerFooter>
-            <Button colorScheme="primary" w="100%">
+            <Button
+              onClick={() => dispatch(clearLocationTypes())}
+              colorScheme="primary"
+              w="100%"
+            >
               RESET FILTERS
             </Button>
           </DrawerFooter>
