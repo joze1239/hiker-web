@@ -40,7 +40,7 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
   const getMapIcon = (location: Location) => {
     const isSelected = selectedLocation?.id === location.id;
 
-    if (location.visitedAt) {
+    if (!!location.visitedAt.length) {
       return isSelected ? HiOutlineCheckCircle : HiCheckCircle;
     }
 
@@ -61,7 +61,7 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
           <Icon
             as={getMapIcon(location)}
             color={location.locationType?.color || 'gray.700'}
-            boxSize={location.visitedAt ? 7 : 8}
+            boxSize={!!location.visitedAt.length ? 7 : 8}
           />
         </Marker>
       )) ?? [],
