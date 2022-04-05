@@ -9,6 +9,7 @@ import {
 } from 'react-icons/hi';
 import Map, { GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
+import { useWindowSize } from 'react-use';
 import {
   selectSelectedLocation,
   setSelectedLocation,
@@ -24,6 +25,7 @@ interface LocationMapProps {
 
 const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
   const dispatch = useDispatch();
+  const { height } = useWindowSize();
   const position = useSelector(selectMapPosition);
   const selectedLocation = useSelector(selectSelectedLocation);
 
@@ -98,7 +100,7 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
         {...position}
         onMove={(evt) => onMove(evt.viewState)}
         style={{
-          height: 430,
+          height: height - 276,
         }}
         mapStyle="mapbox://styles/mapbox/outdoors-v11"
       >

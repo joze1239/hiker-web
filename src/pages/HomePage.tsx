@@ -35,51 +35,57 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (selectedLocation && tabIndex !== 0) {
-      setTabIndex(0);
       scrollToTop();
+      setTabIndex(0);
     }
   }, [selectedLocation]);
 
   return (
     <>
       <Navbar logo />
-      <Container maxW="container.md">
+
+      <LocationDrawer />
+      <Container maxW="container.sm">
         <LocationSearch />
+      </Container>
 
-        <LocationDrawer />
-
-        <Tabs
-          index={tabIndex}
-          onChange={(index) => {
-            setTabIndex(index);
-            dispatch(setSelectedLocation(null));
-          }}
-          variant="soft-rounded"
-          colorScheme="primary"
-          isFitted
-        >
+      <Tabs
+        index={tabIndex}
+        onChange={(index) => {
+          setTabIndex(index);
+          dispatch(setSelectedLocation(null));
+        }}
+        variant="soft-rounded"
+        colorScheme="primary"
+        isFitted
+      >
+        <Container maxW="container.sm">
           <TabList pb={4}>
             <Tab>MAP</Tab>
             <Tab>LIST</Tab>
           </TabList>
+        </Container>
 
-          <TabPanels>
-            <TabPanel px={0} py={4}>
+        <TabPanels>
+          <TabPanel px={0} py={4}>
+            <Container maxW="container.xl">
               <LocationMap
                 locations={locations || []}
                 isLoading={isLoading || isFetching}
               />
-            </TabPanel>
-            <TabPanel px={0} py={4}>
+            </Container>
+          </TabPanel>
+          <TabPanel px={0} py={4}>
+            <Container maxW="container.sm">
               <LocationList
                 locations={locations || []}
                 isLoading={isLoading || isFetching}
               />
-            </TabPanel>
-            loading
-          </TabPanels>
-        </Tabs>
-      </Container>
+            </Container>
+          </TabPanel>
+          loading
+        </TabPanels>
+      </Tabs>
     </>
   );
 };
