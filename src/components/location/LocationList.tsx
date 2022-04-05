@@ -67,6 +67,7 @@ const LocationList: React.FC<LocationListProps> = ({
                 <LocationAttribute
                   icon={HiOutlineLocationMarker}
                   value={location.address}
+                  size="sm"
                 />
               )}
 

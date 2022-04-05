@@ -6,18 +6,18 @@ interface LocationAttributeProps {
   value: string;
   icon: IconType;
   size?: 'sm' | 'md';
-  align?: 'center' | 'flex-start' | 'flex-end';
 }
 
 const LocationAttribute: React.FC<LocationAttributeProps> = ({
   value,
   icon,
   size,
-  align,
 }) => {
   return (
-    <Flex mb={size == 'md' ? 2 : 1} align={align}>
-      <Icon as={icon} mr={2} color="gray.600" boxSize={size == 'md' ? 5 : 4} />
+    <Flex mb={size == 'md' ? 2 : 1}>
+      <Flex mr={2} h={size == 'md' ? 6 : 5} align="center">
+        <Icon as={icon} color="gray.600" boxSize={size == 'md' ? 5 : 4} />
+      </Flex>
       {value && (
         <Text fontSize={size} color="gray.600" whiteSpace="pre-line">
           {value}
@@ -29,7 +29,6 @@ const LocationAttribute: React.FC<LocationAttributeProps> = ({
 
 LocationAttribute.defaultProps = {
   size: 'md',
-  align: 'center',
 };
 
 export default LocationAttribute;

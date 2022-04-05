@@ -14,6 +14,7 @@ import {
   selectSelectedLocation,
   setSelectedLocation,
 } from 'store/slices/locationSlice';
+import { VisitDate } from 'types/VisitDate';
 import LocationAttribute from './LocationAttribute';
 
 const LocationDrawer: React.FC = () => {
@@ -27,6 +28,14 @@ const LocationDrawer: React.FC = () => {
   if (!location) {
     return null;
   }
+
+  const stringifyVisitedAt = (visitedAt: VisitDate[]) => {
+    return visitedAt
+      .map(
+        (visit) => `${visit.date} ${visit.endDate ? `- ${visit.endDate}` : ''}`
+      )
+      .join(`\n`);
+  };
 
   return (
     <Slide direction="bottom" in={!!location} style={{ zIndex: 10 }}>
@@ -77,11 +86,10 @@ const LocationDrawer: React.FC = () => {
               />
             )}
 
-            {location.visitedAt && (
+            {location.visitedAt?.length > 0 && (
               <LocationAttribute
                 icon={HiOutlineCalendar}
-                value={location.visitedAt}
-                align="flex-start"
+                value={stringifyVisitedAt(location.visitedAt)}
               />
             )}
 

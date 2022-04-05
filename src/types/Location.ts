@@ -1,5 +1,6 @@
 import { LocationType } from 'types/LocationType';
-import { Mountain } from './Mountain';
+import { Mountain } from 'types/Mountain';
+import { VisitDate } from 'types/VisitDate';
 
 export interface Location {
   id: number;
@@ -13,6 +14,6 @@ export interface Location {
   address?: string;
   note?: string;
   url?: string;
-  visitedAt: string;
+  visitedAt: VisitDate[];
   parking: string;
 }
