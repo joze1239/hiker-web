@@ -47,6 +47,14 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
     );
   };
 
+  const onClick = (event: any) => {
+    const lngLat = event.lngLat;
+    console.log({
+      latitude: lngLat.lat,
+      longitude: lngLat.lng,
+    });
+  };
+
   const getMapIcon = (location: Location) => {
     const isSelected = selectedLocation?.id === location.id;
 
@@ -111,6 +119,7 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
         {...position}
         id="map" // ID is the same as map variable name from useMap() hook
         onMove={(evt) => onMove(evt.viewState)}
+        onClick={(evt) => onClick(evt)}
         style={{
           height: height - 276,
         }}
