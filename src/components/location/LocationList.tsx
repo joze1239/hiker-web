@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setSelectedLocation } from 'store/slices/locationSlice';
 import { setPosition } from 'store/slices/mapSlice';
 import { Location } from 'types/Location';
+import { scrollToTop } from 'utils/scroll';
 import LocationAttribute from './LocationAttribute';
 
 interface LocationListProps {
@@ -42,6 +43,7 @@ const LocationList: React.FC<LocationListProps> = ({
         <Box
           key={location.id}
           onClick={() => {
+            scrollToTop();
             dispatch(setSelectedLocation(location));
             dispatch(
               setPosition({

@@ -19,7 +19,6 @@ import {
   selectSelectedLocation,
   setSelectedLocation,
 } from 'store/slices/locationSlice';
-import { scrollToTop } from 'utils/scroll';
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -35,7 +34,6 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (selectedLocation && tabIndex !== 0) {
-      scrollToTop();
       setTabIndex(0);
     }
   }, [selectedLocation]);

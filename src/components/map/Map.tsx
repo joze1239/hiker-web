@@ -1,6 +1,6 @@
-import { Box, Button, Flex, Icon, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Icon, Spinner } from '@chakra-ui/react';
 import GeocoderControl from 'components/map/GeocoderControl';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
   HiCheckCircle,
   HiLocationMarker,
@@ -34,7 +34,7 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
   const dispatch = useDispatch();
   const position = useSelector(selectMapPosition);
   const selectedLocation = useSelector(selectSelectedLocation);
-  const { height } = useWindowSize();
+  const { height, width } = useWindowSize();
   const { map } = useMap();
 
   const onMove = (position: MapPosition) => {
@@ -78,13 +78,12 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
     [locations, selectedLocation, height]
   );
 
-  const onClick = () => {
+  useEffect(() => {
     map?.resize();
-  };
+  }, [height, width]);
 
   return (
     <Box position="relative" rounded="xl" overflow="hidden">
-      <Button onClick={onClick}>Resize</Button>
       {isLoading && (
         <Flex
           position="absolute"
@@ -113,7 +112,6 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
         id="map" // ID is the same as map variable name from useMap() hook
         onMove={(evt) => onMove(evt.viewState)}
         style={{
-          // height: Math.max(height - 276, 400),
           height: height - 276,
         }}
         mapStyle="mapbox://styles/mapbox/outdoors-v11"
