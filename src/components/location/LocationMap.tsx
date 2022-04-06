@@ -100,7 +100,7 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
         {...position}
         onMove={(evt) => onMove(evt.viewState)}
         style={{
-          height: height - 276,
+          height: Math.max(height - 276, 400),
         }}
         mapStyle="mapbox://styles/mapbox/outdoors-v11"
       >
