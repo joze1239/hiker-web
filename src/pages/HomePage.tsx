@@ -9,7 +9,7 @@ import {
 import LocationDrawer from 'components/location/LocationDrawer';
 import LocationSearch from 'components/location/LocationFilter';
 import LocationList from 'components/location/LocationList';
-import LocationMap from 'components/location/LocationMap';
+import Map from 'components/map/Map';
 import Navbar from 'components/Navbar';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,10 +69,7 @@ const HomePage: React.FC = () => {
         <TabPanels>
           <TabPanel px={0} py={4}>
             <Container maxW="container.xl">
-              <LocationMap
-                locations={locations || []}
-                isLoading={isLoading || isFetching}
-              />
+              <Map isLoading={isLoading || isFetching} locations={locations} />
             </Container>
           </TabPanel>
           <TabPanel px={0} py={4}>

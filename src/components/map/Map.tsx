@@ -1,4 +1,4 @@
-import { Box, Flex, Icon, Spinner } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, Spinner } from '@chakra-ui/react';
 import GeocoderControl from 'components/map/GeocoderControl';
 import React, { useMemo } from 'react';
 import {
@@ -7,7 +7,13 @@ import {
   HiOutlineCheckCircle,
   HiOutlineLocationMarker,
 } from 'react-icons/hi';
-import Map, { GeolocateControl, Marker, NavigationControl } from 'react-map-gl';
+import {
+  default as MapGL,
+  GeolocateControl,
+  Marker,
+  NavigationControl,
+  useMap,
+} from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useWindowSize } from 'react-use';
 import {
@@ -19,15 +25,17 @@ import { Location } from 'types/Location';
 import { MapPosition } from 'types/MapPosition';
 
 interface LocationMapProps {
-  locations: Location[];
   isLoading: boolean;
+
+  locations?: Location[];
 }
 
-const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
+const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
   const dispatch = useDispatch();
-  const { height } = useWindowSize();
   const position = useSelector(selectMapPosition);
   const selectedLocation = useSelector(selectSelectedLocation);
+  const { height } = useWindowSize();
+  const { map } = useMap();
 
   const onMove = (position: MapPosition) => {
     dispatch(
@@ -51,7 +59,7 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
 
   const markers = useMemo(
     () =>
-      locations.map((location) => (
+      locations?.map((location) => (
         <Marker
           key={location.id}
           latitude={location.latitude}
@@ -67,11 +75,16 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
           />
         </Marker>
       )) ?? [],
-    [locations, selectedLocation]
+    [locations, selectedLocation, height]
   );
+
+  const onClick = () => {
+    map?.resize();
+  };
 
   return (
     <Box position="relative" rounded="xl" overflow="hidden">
+      <Button onClick={onClick}>Resize</Button>
       {isLoading && (
         <Flex
           position="absolute"
@@ -95,12 +108,13 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
           <Spinner size="xl" />
         </Flex>
       )}
-
-      <Map
+      <MapGL
         {...position}
+        id="map" // ID is the same as map variable name from useMap() hook
         onMove={(evt) => onMove(evt.viewState)}
         style={{
-          height: Math.max(height - 276, 400),
+          // height: Math.max(height - 276, 400),
+          height: height - 276,
         }}
         mapStyle="mapbox://styles/mapbox/outdoors-v11"
       >
@@ -108,9 +122,9 @@ const LocationMap: React.FC<LocationMapProps> = ({ locations, isLoading }) => {
         <NavigationControl />
         <GeolocateControl />
         {markers}
-      </Map>
+      </MapGL>
     </Box>
   );
 };
 
-export default LocationMap;
+export default Map;

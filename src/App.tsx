@@ -1,6 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import Pages from 'pages/Pages';
 import React from 'react';
+import { MapProvider } from 'react-map-gl';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from 'store';
@@ -11,7 +12,9 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Provider store={store}>
         <ChakraProvider theme={theme}>
-          <Pages />
+          <MapProvider>
+            <Pages />
+          </MapProvider>
         </ChakraProvider>
       </Provider>
     </BrowserRouter>
