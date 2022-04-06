@@ -12,6 +12,7 @@ import LocationList from 'components/location/LocationList';
 import Map from 'components/map/Map';
 import Navbar from 'components/Navbar';
 import React, { useEffect } from 'react';
+import { useMap } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { useGetLocationListQuery } from 'store/services/location';
@@ -25,7 +26,7 @@ const HomePage: React.FC = () => {
   const selectedLocation = useSelector(selectSelectedLocation);
   const filters = useSelector((state: RootState) => state.location.filters);
   const [tabIndex, setTabIndex] = React.useState(0);
-
+  const { map } = useMap();
   const {
     data: locations,
     isFetching,
@@ -37,6 +38,12 @@ const HomePage: React.FC = () => {
       setTabIndex(0);
     }
   }, [selectedLocation]);
+
+  useEffect(() => {
+    if (tabIndex === 0) {
+      map?.resize();
+    }
+  }, [tabIndex]);
 
   return (
     <>
