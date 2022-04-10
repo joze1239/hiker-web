@@ -1,4 +1,5 @@
-import { Box, Flex, Spinner, Tag, Text } from '@chakra-ui/react';
+import { Box, Flex, Spinner, Text } from '@chakra-ui/react';
+import LocationTypeTag from 'components/locationType/LocationTypeTag';
 import React from 'react';
 import {
   HiOutlineClock,
@@ -90,12 +91,9 @@ const LocationList: React.FC<LocationListProps> = ({
               )}
             </Box>
             <Box>
-              <Tag
-                bg={location.locationType?.color || 'gray.100'}
-                color="white"
-              >
-                {location.locationType?.name}
-              </Tag>
+              {location.locationType && (
+                <LocationTypeTag locationType={location.locationType} />
+              )}
             </Box>
           </Flex>
         </Box>

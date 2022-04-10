@@ -1,5 +1,6 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import { Box, Button, Container, Slide, Text } from '@chakra-ui/react';
+import { Box, Button, Container, HStack, Slide, Text } from '@chakra-ui/react';
+import LocationTypeTag from 'components/locationType/LocationTypeTag';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaParking } from 'react-icons/fa';
@@ -59,9 +60,15 @@ const LocationDrawer: React.FC = () => {
               cursor="pointer"
             />
 
-            <Text mb={4} fontSize="xl" fontWeight="bold">
-              {location.name}
-            </Text>
+            <HStack mb={4} spacing={3} align="center">
+              <Text fontSize="xl" fontWeight="bold">
+                {location.name}
+              </Text>
+
+              {location.locationType && (
+                <LocationTypeTag locationType={location.locationType} />
+              )}
+            </HStack>
 
             {location.address && (
               <LocationAttribute
