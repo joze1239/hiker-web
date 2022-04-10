@@ -1,4 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
+import 'i18n';
 import Pages from 'pages/Pages';
 import React from 'react';
 import { MapProvider } from 'react-map-gl';

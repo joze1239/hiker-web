@@ -12,6 +12,7 @@ import LocationList from 'components/location/LocationList';
 import Map from 'components/map/Map';
 import Navbar from 'components/Navbar';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMap } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
@@ -22,6 +23,7 @@ import {
 } from 'store/slices/locationSlice';
 
 const HomePage: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const selectedLocation = useSelector(selectSelectedLocation);
   const filters = useSelector((state: RootState) => state.location.filters);
@@ -66,8 +68,8 @@ const HomePage: React.FC = () => {
       >
         <Container maxW="container.sm">
           <TabList pb={4}>
-            <Tab>MAP</Tab>
-            <Tab>LIST</Tab>
+            <Tab>{t('map')}</Tab>
+            <Tab>{t('list')}</Tab>
           </TabList>
         </Container>
 
@@ -85,7 +87,6 @@ const HomePage: React.FC = () => {
               />
             </Container>
           </TabPanel>
-          loading
         </TabPanels>
       </Tabs>
     </>

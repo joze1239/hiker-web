@@ -20,6 +20,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { HiOutlineAdjustments, HiSearch, HiX } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
@@ -32,6 +33,7 @@ import {
 } from 'store/slices/locationSlice';
 
 const LocationFilter: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = React.useState('');
@@ -65,7 +67,7 @@ const LocationFilter: React.FC = () => {
               onChange={({ currentTarget }) => {
                 setValue(currentTarget.value);
               }}
-              placeholder="Search"
+              placeholder={t('search')}
               bg="gray.100"
               border="none"
               rounded="lg"
@@ -99,7 +101,7 @@ const LocationFilter: React.FC = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Filter</DrawerHeader>
+          <DrawerHeader>{t('filters')}</DrawerHeader>
           <DrawerBody>
             <Stack>
               {locationTypes?.map((locationType) => (
@@ -121,7 +123,7 @@ const LocationFilter: React.FC = () => {
               colorScheme="primary"
               w="100%"
             >
-              RESET FILTERS
+              {t('resetFilters')}
             </Button>
           </DrawerFooter>
         </DrawerContent>

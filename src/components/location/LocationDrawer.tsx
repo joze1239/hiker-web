@@ -1,6 +1,7 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import { Box, Button, Container, Slide, Text } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaParking } from 'react-icons/fa';
 import {
   HiOutlineCalendar,
@@ -18,6 +19,7 @@ import { VisitDate } from 'types/VisitDate';
 import LocationAttribute from './LocationAttribute';
 
 const LocationDrawer: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const location = useSelector(selectSelectedLocation);
 
@@ -107,7 +109,7 @@ const LocationDrawer: React.FC = () => {
                 mt={4}
                 colorScheme="primary"
               >
-                VIEW DETAILS
+                {t('viewDetails')}
               </Button>
             )}
           </Box>

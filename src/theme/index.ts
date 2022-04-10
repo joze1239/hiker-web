@@ -8,6 +8,9 @@ export const theme: StyleConfig = extendTheme({
     Button: {
       baseStyle: { _focus: { boxShadow: 'none' } },
       variants: {
+        solid: () => ({
+          textTransform: 'uppercase',
+        }),
         link: () => ({
           _hover: {
             textDecoration: 'none',
@@ -28,7 +31,9 @@ export const theme: StyleConfig = extendTheme({
           const { colorScheme: c, theme } = props;
           return {
             tab: {
+              textTransform: 'uppercase',
               color: 'gray.500',
+
               _selected: {
                 color: 'white',
                 bg: getColor(theme, `${c}.500`),
