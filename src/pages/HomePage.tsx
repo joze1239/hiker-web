@@ -58,7 +58,7 @@ const HomePage: React.FC = () => {
 
       <Tabs
         index={tabIndex}
-        onChange={(index) => {
+        onChange={(index: number) => {
           setTabIndex(index);
           dispatch(setSelectedLocation(null));
         }}
