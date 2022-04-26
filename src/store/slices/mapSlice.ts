@@ -16,13 +16,13 @@ const mapSlice = createSlice({
     },
   } as MapState,
   reducers: {
-    setPosition: (state, action: PayloadAction<MapPosition>) => {
+    setMapPosition: (state, action: PayloadAction<MapPosition>) => {
       state.position = action.payload;
     },
   },
 });
 
-export const { setPosition } = mapSlice.actions;
+export const { setMapPosition } = mapSlice.actions;
 
 export default mapSlice.reducer;
 

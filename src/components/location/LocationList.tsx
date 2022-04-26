@@ -8,7 +8,7 @@ import {
 } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
 import { setSelectedLocation } from 'store/slices/locationSlice';
-import { setPosition } from 'store/slices/mapSlice';
+import { setMapPosition } from 'store/slices/mapSlice';
 import { Location } from 'types/Location';
 import { scrollToTop } from 'utils/scroll';
 import LocationAttribute from './LocationAttribute';
@@ -47,7 +47,7 @@ const LocationList: React.FC<LocationListProps> = ({
             scrollToTop();
             dispatch(setSelectedLocation(location));
             dispatch(
-              setPosition({
+              setMapPosition({
                 latitude: location.latitude,
                 longitude: location.longitude,
                 zoom: 12,

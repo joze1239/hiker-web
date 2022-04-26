@@ -1,6 +1,6 @@
 import { Box, Flex, Icon, Spinner } from '@chakra-ui/react';
 import GeocoderControl from 'components/map/GeocoderControl';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   HiCheckCircle,
   HiLocationMarker,
@@ -20,7 +20,7 @@ import {
   selectSelectedLocation,
   setSelectedLocation,
 } from 'store/slices/locationSlice';
-import { selectMapPosition, setPosition } from 'store/slices/mapSlice';
+import { selectMapPosition } from 'store/slices/mapSlice';
 import { Location } from 'types/Location';
 import { MapPosition } from 'types/MapPosition';
 
@@ -32,19 +32,18 @@ interface LocationMapProps {
 
 const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
   const dispatch = useDispatch();
-  const position = useSelector(selectMapPosition);
+  const mapPosition = useSelector(selectMapPosition);
+  const [position, setPosition] = useState(mapPosition);
   const selectedLocation = useSelector(selectSelectedLocation);
   const { height, width } = useWindowSize();
   const { map } = useMap();
 
   const onMove = (position: MapPosition) => {
-    dispatch(
-      setPosition({
-        latitude: position.latitude,
-        longitude: position.longitude,
-        zoom: position.zoom,
-      })
-    );
+    setPosition({
+      latitude: position.latitude,
+      longitude: position.longitude,
+      zoom: position.zoom,
+    });
   };
 
   const onClick = (event: any) => {
@@ -67,28 +66,39 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
 
   const markers = useMemo(
     () =>
-      locations?.map((location) => (
-        <Marker
-          key={location.id}
-          latitude={location.latitude}
-          longitude={location.longitude}
-          onClick={() => {
-            dispatch(setSelectedLocation(location));
-          }}
-        >
-          <Icon
-            as={getMapIcon(location)}
-            color={location.locationType?.color || 'gray.700'}
-            boxSize={!!location.visitedAt.length ? 7 : 8}
-          />
-        </Marker>
-      )) ?? [],
+      locations?.map((location) => {
+        const visited = !!location.visitedAt.length;
+
+        return (
+          <Marker
+            key={location.id}
+            latitude={location.latitude}
+            longitude={location.longitude}
+            onClick={() => {
+              dispatch(setSelectedLocation(location));
+            }}
+          >
+            <Icon
+              as={getMapIcon(location)}
+              color={location.locationType?.color || 'gray.700'}
+              boxSize={visited ? 7 : 8}
+              style={{
+                transform: visited ? 'none' : `translateY(-12px)`,
+              }}
+            />
+          </Marker>
+        );
+      }) ?? [],
     [locations, selectedLocation, height]
   );
 
   useEffect(() => {
     map?.resize();
   }, [height, width]);
+
+  useEffect(() => {
+    setPosition(mapPosition);
+  }, [mapPosition]);
 
   return (
     <Box position="relative" rounded="xl" overflow="hidden">
