@@ -1,14 +1,9 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from 'store/baseQuery';
 import { mapLocation } from 'store/mappers/mapLocation';
+import { api } from 'store/services/api';
 import { Location } from 'types/Location';
 import { LocationFilters } from 'types/LocationFilters';
 
-export const LOCATION_API_REDUCER_KEY = 'locationApi';
-
-export const locationApi = createApi({
-  baseQuery,
-  reducerPath: LOCATION_API_REDUCER_KEY,
+export const locationApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getLocationList: builder.query<Location[], LocationFilters>({
       query: (filters) => ({

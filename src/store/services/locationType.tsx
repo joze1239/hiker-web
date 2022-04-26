@@ -1,13 +1,10 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from 'store/baseQuery';
 import { mapLocationType } from 'store/mappers/mapLocationType';
+import { api } from 'store/services/api';
 import { LocationType } from 'types/LocationType';
 
 export const LOCATION_TYPE_API_REDUCER_KEY = 'locationTypeApi';
 
-export const locationTypeApi = createApi({
-  baseQuery,
-  reducerPath: LOCATION_TYPE_API_REDUCER_KEY,
+export const locationTypeApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getLocationTypeList: builder.query<LocationType[], void>({
       query: () => ({

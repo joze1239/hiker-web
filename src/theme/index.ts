@@ -48,7 +48,7 @@ export const theme: StyleConfig = extendTheme({
   styles: {
     global: {
       '*': {
-        '-webkit-tap-highlight-color': 'transparent',
+        WebkitTapHighlightColor: 'transparent',
         userSelect: 'none',
       },
       '.mapboxgl-ctrl-geocoder': {
