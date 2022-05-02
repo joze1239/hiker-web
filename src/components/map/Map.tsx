@@ -137,7 +137,7 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
       >
         <GeocoderControl position="top-left" />
         <NavigationControl />
-        <GeolocateControl showUserHeading />
+        <GeolocateControl trackUserLocation showUserHeading />
         {markers}
       </MapGL>
     </Box>
