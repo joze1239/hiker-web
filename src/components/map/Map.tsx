@@ -16,6 +16,7 @@ import {
 } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useWindowSize } from 'react-use';
+import { RootState } from 'store';
 import {
   selectSelectedLocation,
   setSelectedLocation,
@@ -35,6 +36,7 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
   const mapPosition = useSelector(selectMapPosition);
   const [position, setPosition] = useState(mapPosition);
   const selectedLocation = useSelector(selectSelectedLocation);
+  const settings = useSelector((state: RootState) => state.settings);
   const { height, width } = useWindowSize();
   const { map } = useMap();
 
@@ -54,10 +56,14 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
     });
   };
 
+  const isLocationVisited = (location: Location) => {
+    return !!location.visitedAt.length && settings.showVisited;
+  };
+
   const getMapIcon = (location: Location) => {
     const isSelected = selectedLocation?.id === location.id;
 
-    if (!!location.visitedAt.length) {
+    if (isLocationVisited(location)) {
       return isSelected ? HiOutlineCheckCircle : HiCheckCircle;
     }
 
@@ -67,7 +73,7 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
   const markers = useMemo(
     () =>
       locations?.map((location) => {
-        const visited = !!location.visitedAt.length;
+        const visited = isLocationVisited(location);
 
         return (
           <Marker
@@ -89,7 +95,7 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
           </Marker>
         );
       }) ?? [],
-    [locations, selectedLocation, height]
+    [locations, selectedLocation, height, settings]
   );
 
   useEffect(() => {

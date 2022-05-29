@@ -1,9 +1,16 @@
-import { ColorModeScript } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import 'i18n';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import * as React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import { MapProvider } from 'react-map-gl';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from 'store';
+import { theme } from 'theme';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
@@ -17,7 +24,18 @@ mapboxgl.workerClass =
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
-    <App />
+
+    <BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ChakraProvider theme={theme}>
+            <MapProvider>
+              <App />
+            </MapProvider>
+          </ChakraProvider>
+        </PersistGate>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

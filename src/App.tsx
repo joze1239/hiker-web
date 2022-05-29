@@ -1,25 +1,21 @@
-import { ChakraProvider } from '@chakra-ui/react';
 import 'i18n';
 import Pages from 'pages/Pages';
-import React from 'react';
-import { MapProvider } from 'react-map-gl';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { store } from 'store';
-import { theme } from 'theme';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
+import { setShowVisited } from 'store/slices/settingsSlice';
 
 const App: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <ChakraProvider theme={theme}>
-          <MapProvider>
-            <Pages />
-          </MapProvider>
-        </ChakraProvider>
-      </Provider>
-    </BrowserRouter>
-  );
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (searchParams.get('visited') === 'true') {
+      dispatch(setShowVisited(true));
+    }
+  }, []);
+
+  return <Pages />;
 };
 
 export default App;
