@@ -28,10 +28,6 @@ const LocationDrawer: React.FC = () => {
     dispatch(setSelectedLocation(null));
   };
 
-  if (!location) {
-    return null;
-  }
-
   const stringifyVisitedAt = (visitedAt: VisitDate[]) => {
     return visitedAt
       .map(
@@ -39,6 +35,10 @@ const LocationDrawer: React.FC = () => {
       )
       .join(`\n`);
   };
+
+  if (!location) {
+    return null;
+  }
 
   return (
     <Slide direction="bottom" in={!!location} style={{ zIndex: 10 }}>

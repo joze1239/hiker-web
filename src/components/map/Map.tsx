@@ -27,7 +27,6 @@ import { MapPosition } from 'types/MapPosition';
 
 interface LocationMapProps {
   isLoading: boolean;
-
   locations?: Location[];
 }
 
@@ -45,14 +44,6 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
       latitude: position.latitude,
       longitude: position.longitude,
       zoom: position.zoom,
-    });
-  };
-
-  const onClick = (event: any) => {
-    const lngLat = event.lngLat;
-    console.log({
-      latitude: lngLat.lat,
-      longitude: lngLat.lng,
     });
   };
 
@@ -135,7 +126,6 @@ const Map: React.FC<LocationMapProps> = ({ isLoading, locations }) => {
         {...position}
         id="map" // ID is the same as map variable name from useMap() hook
         onMove={(evt) => onMove(evt.viewState)}
-        onClick={(evt) => onClick(evt)}
         style={{
           height: height - 276,
         }}
