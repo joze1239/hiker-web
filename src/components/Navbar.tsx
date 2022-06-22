@@ -1,9 +1,9 @@
 import { Container, Flex, Icon, Text } from '@chakra-ui/react';
 import { ReactComponent as Logo } from 'assets/logo.svg';
+import { ROUTE } from 'config/routes';
 import React from 'react';
 import { HiArrowLeft } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
-import { ROUTE } from 'utils/routes';
 
 interface NavbarProps {
   logo?: boolean;
