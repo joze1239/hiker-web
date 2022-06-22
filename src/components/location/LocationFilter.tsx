@@ -24,7 +24,7 @@ import { HiOutlineAdjustments, HiSearch, HiX } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 import { RootState } from 'store';
-import { useGetLocationTypeListQuery } from 'store/services/locationType';
+import { useGetLocationTypeListQuery } from 'store/services/locationTypeApi';
 import {
   clearLocationTypes,
   setSearch,

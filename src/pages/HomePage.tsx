@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { useMap } from 'react-map-gl';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
-import { useGetLocationListQuery } from 'store/services/location';
+import { useGetLocationListQuery } from 'store/services/locationApi';
 import {
   selectSelectedLocation,
   setSelectedLocation,
