@@ -1,4 +1,3 @@
-import { mapLocation } from 'store/mappers/mapLocation';
 import { api } from 'store/services/api';
 import { Location } from 'types/Location';
 import { LocationFilters } from 'types/LocationFilters';
@@ -27,7 +26,7 @@ export const locationApi = api.injectEndpoints({
         },
       }),
       transformResponse: (response: any) => {
-        return response.data?.map((location: any) => mapLocation(location));
+        return response.data;
       },
     }),
     getLocation: builder.query<Location, number>({
@@ -35,7 +34,7 @@ export const locationApi = api.injectEndpoints({
         url: `locations/${id}`,
       }),
       transformResponse: (response: any) => {
-        return mapLocation(response.data);
+        return response.data;
       },
     }),
   }),

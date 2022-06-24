@@ -1,4 +1,3 @@
-import { mapLocationType } from 'store/mappers/mapLocationType';
 import { api } from 'store/services/api';
 import { LocationType } from 'types/LocationType';
 
@@ -18,9 +17,7 @@ export const locationTypeApi = api.injectEndpoints({
         },
       }),
       transformResponse: (response: any) => {
-        return response.data?.map((locationType: any) =>
-          mapLocationType(locationType)
-        );
+        return response.data;
       },
     }),
     getLocationType: builder.query<LocationType, number>({
@@ -28,7 +25,7 @@ export const locationTypeApi = api.injectEndpoints({
         url: `location-types/${id}`,
       }),
       transformResponse: (response: any) => {
-        return mapLocationType(response.data);
+        return response.data;
       },
     }),
   }),
